@@ -15,6 +15,7 @@ class GaussianModel(Model):
         r = jnp.arange(dim)
         diagonal_indexes = (r + 1) * (r + 2) // 2 - 1
         chol_init_vec = chol_init_vec.at[diagonal_indexes].set(jnp.ones((dim,)))
+        
 
         chol_init = hk.initializers.Constant(chol_init_vec)
         mu_init = hk.initializers.Constant(jnp.zeros((dim,)))

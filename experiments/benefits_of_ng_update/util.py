@@ -2,6 +2,7 @@ import jax.flatten_util
 import jax.numpy as jnp
 import chex
 import jax
+import optax
 from matplotlib.axes import Axes
 from typing import Any, Callable, List, NamedTuple, Tuple
 from functools import reduce
@@ -47,6 +48,25 @@ def plot_log_prob(ax: Axes, log_prob: Callable[[chex.Array], chex.Array], title:
     yline = jnp.linspace(-4, 4, resolution)
     xgrid, ygrid = jnp.meshgrid(xline, yline)
     xyinput = jnp.hstack([xgrid.reshape(-1, 1), ygrid.reshape(-1, 1)])
-    zgrid = jnp.exp(jnp.reshape(log_prob(xyinput), (resolution, resolution)))
+    zgrid = log_prob(xyinput)
+    #print(zgrid.min())
+    #print(jnp.isnan(zgrid).any())
+    zgrid = jnp.reshape(zgrid, (resolution, resolution))
+
+    zgrid = jnp.exp(zgrid)
+    
+    
     ax.contourf(xgrid, ygrid, zgrid, levels=100)
     ax.set_title(title)
+
+
+def wrap_log_prob_function(func: Callable[[chex.Array], chex.Array]) -> Callable[[chex.Array], chex.Array]:
+    def f_wrapped(samples: chex.Array) -> chex.Array:
+        log_prob = func(samples)
+        f_wrapped._num_calls += log_prob.shape[0]
+        return log_prob
+    f_wrapped._num_calls = 0
+    return f_wrapped
+
+def get_log_prob_num_calls(func: Callable[[chex.Array], chex.Array]) -> int:
+    return func._num_calls
