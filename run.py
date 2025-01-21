@@ -30,6 +30,7 @@ def main():
 
     # Parse arguments and call the appropriate function
     args = parser.parse_args()
+    args.output_dir = os.path.join(os.path.abspath(os.getcwd()), "outputs")
     args.func(args)
 
 
