@@ -1,0 +1,51 @@
+defaults:
+  - training: default
+  - training/optimizer: default_lr_schedule
+  - flow: default
+  - target: default
+  - fab: default
+  - _self_
+#  - override hydra/launcher: joblib
+
+hydra:
+  job:
+    chdir: false
+
+fab:
+  n_intermediate_distributions: 2
+
+target:
+  custom_samples: false
+  temperature: 0.1  # 0.1 or 1 are two good options
+
+
+flow:
+  dim: 2
+  n_aug: 1
+  nodes: 4
+
+training:
+  n_epoch: 20000
+  batch_size: 128
+  plot_batch_size: 256
+  eval_batch_size: 16
+  seed: 0
+  train_set_size: 1000
+  test_set_size: 1000
+  n_eval: 10
+  use_flow_aux_loss: false
+  aux_loss_weight: 1.0
+  data_augmentation_for_non_eq: false # Only use for training by maximum likelihood.
+  factor_to_train_non_eq_flow: 3
+
+
+logger:
+#  list_logger: null
+#  pandas_logger:
+#    save_period: 1000 # how often to save the pandas dataframe as a csv
+  wandb:
+    name: dw4_fab_${flow.type}
+    project: fab
+    entity: flow-ais-bootstrap
+    tags: [dw4,fab,Leucadendron1]
+
