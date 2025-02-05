@@ -11,7 +11,12 @@ def q(x):
     # return jnp.clip(1/(x**2 + 1), min=0.4)
     return 1/(x**2 + 1)
 
-def residual(x, a):
+def log_q_o_given_x(x):
+    # log responsibility for component q(x) (with weight 0.9)
+    # the second component is simulated with \approx 0.1 everywhere
+    return jnp.log(q(x) * 0.9) - jnp.log(q(x) * 0.9 + 0.1 * 0.1)
+
+def residual(x, a, with_log_responsibilities: bool):
     q_x = q(x)
     p_x = p(x)
 
@@ -19,23 +24,29 @@ def residual(x, a):
 
     log_q_x_a = jnp.log(q_x + a)
     log_p_x_a = jnp.log(p_x + a)
-    log_q_x = jnp.log(q_x)
-    log_p_x = jnp.log(p_x)
-    # return jnp.minimum(jnp.exp(log_p_x - log_q_x), jnp.exp(log_p_x_a - log_q_x_a))
-    return jnp.exp(log_p_x_a - log_q_x_a)
+
+    if with_log_responsibilities:
+        return jnp.exp(log_p_x_a - log_q_x_a + log_q_o_given_x(x))
+    else:
+        return jnp.exp(log_p_x_a - log_q_x_a)
 
 
 def plot(output_dir: str):
+    plot_with_responsibilities = False
+
     # Set the range of x-values (avoiding division by zero)
     x = jnp.linspace(-5, 15, 500)
 
     # Define the parameter 'a'
-    a = 0.01
+    if plot_with_responsibilities:
+        a = 0.0
+    else:
+        a = 0.01
 
     # Compute the functions
     y1 = p(x)
     y2 = q(x)
-    y3 = residual(x, a)
+    y3 = residual(x, a, plot_with_responsibilities)
 
     # Plot the curves
     fig = plt.figure(figsize=(10, 6))
@@ -53,7 +64,7 @@ def plot(output_dir: str):
             return f"log{{{f_name}}}"
         else:
             return f_name
-    plt.plot(x, y1, label=f"{make_label('f(x)')}", color="blue")
+    plt.plot(x, y1, label=f"{make_label('p(x)')}", color="blue")
     plt.plot(x, y2, label=f"{make_label('q(x)')}", color="orange")
     plt.plot(x, y3, label=f"{make_label('(p(x) + a) / (q(x) + a)')}, a={a}", color="green")
 
