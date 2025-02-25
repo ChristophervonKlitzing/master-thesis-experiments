@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: gmmvi
+Version: 1.1
+Summary: A library for learning Gaussian mixture models for variational inference
+Author: Oleg Arenz
+Author-email: oleg@holistic-robotics.de
+License: MIT
+Keywords: variational inference,machine learning
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: cw2>=2.0.0
+Requires-Dist: matplotlib>=3.3.4
+Requires-Dist: numpy>=1.22.3
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: tensorflow>=2.12.0
+Requires-Dist: tensorflow-datasets>=4.6.0
+Requires-Dist: tensorflow-probability>=0.12.1
+Requires-Dist: wandb>=0.12.9
+Requires-Dist: mergedeep
+Requires-Dist: plotly>=5.11
+Provides-Extra: doc
+Requires-Dist: sphinx==5.3.0; extra == "doc"
+Requires-Dist: sphinx_rtd_theme==0.2.5b2; extra == "doc"
+Requires-Dist: sphinxcontrib-bibtex>=2.5.0; extra == "doc"
+
+GMMVI: Gaussian Mixture Model Variational Inference
+===================================================
+
+A framework for optimizing Gaussian mixture models for variational inference.
+Please refer to the `online documentation <https://gmmvi.rtfd.io>`_ for details.

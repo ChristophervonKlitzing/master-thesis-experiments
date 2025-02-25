@@ -1,0 +1,15 @@
+cw2>=2.0.0
+matplotlib>=3.3.4
+numpy>=1.22.3
+PyYAML>=6.0
+tensorflow>=2.12.0
+tensorflow-datasets>=4.6.0
+tensorflow-probability>=0.12.1
+wandb>=0.12.9
+mergedeep
+plotly>=5.11
+
+[doc]
+sphinx==5.3.0
+sphinx_rtd_theme==0.2.5b2
+sphinxcontrib-bibtex>=2.5.0
