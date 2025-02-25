@@ -1,0 +1,19 @@
+git+https://github.com/lollcat/se3-augmented-coupling-flows.git#egg=augmentedequivariantflows
+jax[cuda] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+dm-haiku
+distrax
+chex
+optax
+e3nn-jax==0.17.2
+flax
+matplotlib
+tqdm
+pandas
+jupyterlab
+wandb
+pytest
+hydra-core
+hydra-joblib-launcher
+joblib
+mdtraj
+tables

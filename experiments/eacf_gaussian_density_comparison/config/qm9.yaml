@@ -1,0 +1,41 @@
+defaults:
+  - training: default
+  - training/optimizer: default_lr_schedule
+  - flow: default
+  - target: default
+  - _self_
+#  - override hydra/launcher: joblib
+
+hydra:
+  job:
+    chdir: false
+
+flow:
+  n_aug: 3
+  nodes: 19
+
+training:
+  optimizer:
+    init_lr: 6e-5
+    end_lr: 6e-5
+  use_64_bit: false
+  n_epoch: 800
+  batch_size: 32
+  plot_batch_size: 16 # Can be small as we plot with big sample size later.
+  eval_batch_size: 32
+  seed: 0
+  train_set_size: null
+  test_set_size: null
+  aux_loss_weight: 10.0
+  final_run: true # eval on test set instead of validation set.
+
+
+logger:
+#  list_logger: null
+#  pandas_logger:
+#    save_period: 1000 # how often to save the pandas dataframe as a csv
+  wandb:
+    name: qm9pos_${flow.type}
+    project: fab
+    entity: flow-ais-bootstrap
+    tags: [qm9pos,ml,protea]
