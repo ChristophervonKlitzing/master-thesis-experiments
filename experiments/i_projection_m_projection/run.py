@@ -7,7 +7,7 @@ from scipy.stats import norm
 
 def run(args=None):
     # Define x-axis
-    x = np.linspace(-6, 6, 1000)
+    x = np.linspace(-6, 6, 100)
 
     # Define two-mode target distribution p(x)
     p = 0.5 * norm.pdf(x, loc=-2, scale=0.7) + 0.5 * norm.pdf(x, loc=2, scale=0.7)
@@ -18,10 +18,14 @@ def run(args=None):
     # M-projection: covers both modes
     q_M = norm.pdf(x, loc=0, scale=2.2)
 
+    fontsize = 25
+
+    file_type = "pgf"
+
     # Projections to plot separately
     projections = [
-        (q_I, "i_projection.pdf", lambda ax: ax.text(-3.2, 0.45, "q", fontsize=16, color="blue")),
-        (q_M, "m_projection.pdf", lambda ax: ax.text(0, 0.2, "q", fontsize=16, color="blue")),
+        (q_I, f"i_projection.{file_type}", lambda ax: ax.text(-3.2, 0.45, "$q$", fontsize=fontsize, color="blue")),
+        (q_M, f"m_projection.{file_type}", lambda ax: ax.text(0, 0.22, "$q$", fontsize=fontsize, color="blue")),
     ]
 
     for q, filename, annotate_q in projections:
@@ -32,7 +36,7 @@ def run(args=None):
         ax.plot(x, p, color='green', linewidth=1)
         ax.plot(x, q, color='blue', linewidth=1)
         ax.fill_between(x, p, color='green', alpha=0.2)
-        ax.fill_between(x, q, color='blue', alpha=0.3)
+        ax.fill_between(x, q, color='cornflowerblue', alpha=0.4)
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
@@ -45,9 +49,9 @@ def run(args=None):
 
         ax.axis('off')  # Optional: keep only if you don't want any axes
 
-        ax.text(2.5, 0.3, "p*", fontsize=16, color="green")
+        ax.text(2.5, 0.3, "$p^*$", fontsize=fontsize, color="green")
         annotate_q(ax)
 
         fig.tight_layout()
-        fig.savefig(f"outputs/experiments/i_and_m_projection/{filename}", format='pdf', bbox_inches='tight')
+        fig.savefig(f"outputs/experiments/i_and_m_projection/{filename}", format=file_type, bbox_inches='tight')
         plt.close(fig)
