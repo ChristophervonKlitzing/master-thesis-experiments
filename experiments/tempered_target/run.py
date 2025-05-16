@@ -33,7 +33,7 @@ def run(args=None):
             ax.plot(x, p, '--', color='gray', label='Original p(x)')
         ax.fill_between(x, p_T, color='cornflowerblue', alpha=0.4)
         # ax.set_title(f'T = {T}')
-        ax.text(-0.9, 0.63, f"T = {T:.0f}", color="blue", fontsize=fontsize)
+        ax.text(-0.9, 0.63, f"$T = {T:.0f}$", color="blue", fontsize=fontsize)
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
