@@ -1,0 +1,84 @@
+# This is the config for generating the main comparison Ramachandrans (not in appendix),
+# similar to TA-BG Ramachandran, which isn't in the appendix either.
+
+columns:
+  Ground Truth: # column
+    Dipeptide: # row
+      run: yvxv38a6
+      ground_truth: True 
+      path: None_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
+
+    Tetrapeptide:
+      run: buswzuar # earthy-slicence-259
+      ground_truth: True
+      path: None_TORSIONS_F_2Dmarginal_0_1_<i>.pkl
+
+    Hexapeptide:
+      run: dgx69ax3 # warm-rain-280
+      ground_truth: True
+      path: None_TORSIONS_F_2Dmarginal_3_4_<i>.pkl
+
+  ADSM (ours):
+    Dipeptide: # row
+      run: 2ishamje
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
+
+    Tetrapeptide:
+      run: y08pxbzu # distinctive-wood-320
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_0_1_<i>.pkl
+
+    Hexapeptide:
+      run: 7vmkbnzn # rogue-bantha-212
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_3_4_<i>.pkl
+
+  ADSM-NoTr:
+    Dipeptide: # row
+      run: it6is2ou
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
+
+    Tetrapeptide:
+      run: 5fyfqh08 # rare-sky-324
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_0_1_<i>.pkl
+
+    Hexapeptide:
+      run: vo7k5ibq # azure-river-281
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_3_4_<i>.pkl
+  
+  TA-BG:
+    Dipeptide: # row
+      run: rzz84ub5 # iconic-firebrand-242
+      ground_truth: False 
+      path: None_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
+
+    Tetrapeptide:
+      run: m4ovwj33 # toasty-sky-261
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_0_1_<i>.pkl
+
+    Hexapeptide:
+      run: z7gsyidt # misty-vortex-313
+      ground_truth: False
+      path: 300.0K_TORSIONS_F_2Dmarginal_3_4_<i>.pkl
+
+  REV KLD:
+    Dipeptide: # row
+      run: yvxv38a6
+      ground_truth: False 
+      path: None_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
+
+    Tetrapeptide:
+      run: buswzuar # earthy-slicence-259
+      ground_truth: False
+      path: None_TORSIONS_F_2Dmarginal_0_1_<i>.pkl
+
+    Hexapeptide:
+      run: dgx69ax3 # warm-rain-280
+      ground_truth: False
+      path: None_TORSIONS_F_2Dmarginal_3_4_<i>.pkl
+    

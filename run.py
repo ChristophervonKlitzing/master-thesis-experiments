@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 
 def _discover_experiments():
@@ -16,6 +17,9 @@ def run_experiment(args):
 
 
 def main():
+    """
+    TODO: This entire CLI is not expressive enough and should probably be redone and moved into one of the experiment directories!
+    """
     parser = argparse.ArgumentParser(description="Run different tasks or experiments.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -27,6 +31,8 @@ def main():
         help="The name of the experiment to run"
     )
     experiment_parser.set_defaults(func=lambda args: run_experiment(args))
+
+    parser.add_argument("--extra_1", default="", help="Add extra arguments in the form of a string")
 
     # Parse arguments and call the appropriate function
     args = parser.parse_args()

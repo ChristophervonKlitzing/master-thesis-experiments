@@ -1,0 +1,12 @@
+
+columns:
+  Ground Truth: # column
+    Dipeptide: # row
+      run: yvxv38a6
+      ground_truth: True 
+      path: None_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
+  REV KLD: 
+    Dipeptide:
+      run: yvxv38a6
+      ground_truth: False
+      path: None_TORSIONS_F_2Dmarginal_4_11_<i>.pkl
